@@ -76,7 +76,7 @@ run_step() {
 }
 
 # ========== Preflight ==========
-require_cmd eksctl helm kubectl
+require_cmd eksctl helm kubectl flux
 require_file cluster.yaml fluxinstance.yaml
 
 # Optional context info
@@ -92,6 +92,9 @@ run_step "Installing Flux Operator via Helm" \
   helm install flux-operator oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
   --namespace flux-system \
   --create-namespace
+
+run_step "Creating flux SSH secret for Rhys' Github" \
+  flux create secret git git-ssh-auth --namespace flux-system --url=ssh://git@github.com/BillyUdders/flux-operator-playground.git --private-key-file=/home/rhys/.ssh/id_ed25519
 
 run_step "Creating a Flux Instance (kubectl apply -f fluxinstance.yaml)" \
   kubectl apply -f fluxinstance.yaml
