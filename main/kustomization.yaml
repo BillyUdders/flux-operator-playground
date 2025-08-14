@@ -1,0 +1,34 @@
+# 1) Flux Source: GitRepository
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: my-repo
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/your-org/your-repo.git
+  ref:
+    branch: main
+---
+# 2) Simple kustomize base at repo root (kustomization.yaml)
+# This assumes rset.yaml lives at the root of the repo.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resourceset.yaml
+---
+# 3) Flux Kustomization that builds the repo root (which includes rset.yaml via kustomize)
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: my-repo-base
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: my-repo
+  wait: true
+  timeout: 2m
