@@ -8,10 +8,17 @@ metadata:
 spec:
   # Each map in this list yields one instance of the resources below.
   inputs:
-    - name: "web"
+    - name: "frontend"
       namespace: "default"
-      image: "nginx:1.27"
+      image: "whalesay:latest"
       replicas: "2"
+      containerPort: "8080"
+      servicePort: "80"
+      serviceType: "ClusterIP"
+    - name: "backend"
+      namespace: "default"
+      image: "hello-world:latest"
+      replicas: "4"
       containerPort: "8080"
       servicePort: "80"
       serviceType: "ClusterIP"
