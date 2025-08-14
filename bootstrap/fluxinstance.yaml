@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: git-token-auth
+  name: git-ssh-auth
   namespace: flux-system
 type: Opaque
 stringData:
@@ -21,7 +21,7 @@ metadata:
 spec:
   sync:
     kind: GitRepository
-    url: "ssh://git@github.com/my-org/my-fleet.git"
+    url: "git@github.com:BillyUdders/flux-operator-playground.git"
     ref: "refs/heads/main"
     path: "main"
     pullSecret: "git-ssh-auth"
