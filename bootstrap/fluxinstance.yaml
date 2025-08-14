@@ -22,7 +22,7 @@ spec:
   sync:
     kind: GitRepository
     url: "git@github.com:BillyUdders/flux-operator-playground.git"
-    ref: "refs/heads/main"
+    ref: "refs/heads/master"
     path: "main"
     pullSecret: "git-ssh-auth"
   distribution:
