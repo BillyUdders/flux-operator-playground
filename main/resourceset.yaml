@@ -53,4 +53,3 @@ spec:
           - protocol: TCP
             port: << inputs.servicePort | int >>
             targetPort: << inputs.containerPort | int >>
-
