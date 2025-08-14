@@ -1,0 +1,15 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: flux-bill
+  region: us-west-2
+  version: "1.33" # EKS Kubernetes version
+
+managedNodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 4
+    amiFamily: AmazonLinux2
