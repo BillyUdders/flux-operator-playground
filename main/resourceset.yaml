@@ -9,7 +9,7 @@ spec:
   # Each map in this list yields one instance of the resources below.
   inputs:
     - name: "web"
-      namespace: "web"
+      namespace: "default"
       image: "nginx:1.27"
       replicas: "2"
       containerPort: "8080"
